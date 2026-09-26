@@ -57,17 +57,13 @@ python -m edge_guardian serve --profile fixture      # → http://127.0.0.1:8600
 The fixture profile replays annotated synthetic clips through the *real* agent loop, policy, memory, graph,
 telemetry and UI, so the whole product can be exercised on any laptop.
 
-### B. Windows PC with real models (Ollama) — desktop app
+### B. Windows PC with real models — desktop app
 ```powershell
 Set-ExecutionPolicy -Scope Process Bypass
 .\scripts\setup_windows.ps1 -Compute CPU        # or -Compute CUDA; builds EdgeGuardian.exe + Desktop shortcut
 # then double-click EdgeGuardian.exe  (or: .\scripts\run_windows.ps1 to see the logs; -Web for the browser UI)
 ```
-Requires [Ollama](https://ollama.com/download) (`ollama pull qwen3.5:4b` — `qwen3.5:9b` with ≥8 GB VRAM); the
-app starts Ollama itself when it is not running. On a CPU-only PC the `pc_cpu` profile uses the *hybrid*
-planner (deterministic tool selection, the model does VLM verification, the critic and the closing report:
-~2–3 min per clip instead of 12). Linux/macOS: `python -m venv .venv && pip install -r requirements/*.txt`
-then `python -m edge_guardian desktop --profile pc_cpu`.
+
 
 ### C. HP ZGX Nano / GB10 (final, all inference local) — desktop app
 ```bash
@@ -79,7 +75,7 @@ WEB=1 bash scripts/run_gb10.sh                # or the browser UI on :8600 (ssh 
 See `docs/GB10_RUNBOOK.md` (ZTK/ZRT commands from the HP walkthrough, ports, memory budget, troubleshooting).
 
 ### D. Colab GPU functional test
-`notebooks/EdgeGuardian_Colab.ipynb` — same code, Ollama inside the runtime. Portability check only.
+`notebooks/EdgeGuardian_Colab.ipynb` — same code. Portability check only.
 
 ---
 
